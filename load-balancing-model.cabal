@@ -1,0 +1,56 @@
+name:                load-balancing-model
+version:             0.1.0.0
+synopsis:            A simulation model for load balancing
+description:
+    This is a simulation model to tune the load balancing.
+    .
+license:             BSD3
+license-file:        LICENSE
+author:              David Sorokin
+maintainer:          david.sorokin@gmail.com
+copyright:           (c) 2017. David Sorokin
+category:            Simulation
+build-type:          Simple
+extra-source-files:  README.md
+cabal-version:       >=1.10
+
+library
+  hs-source-dirs:      src
+  exposed-modules:     Lib
+  build-depends:       base >= 4.7 && < 5
+  default-language:    Haskell2010
+
+executable load-balancing-model
+  hs-source-dirs:      app
+  main-is:             Main.hs
+  other-modules:       Model
+                       Experiment
+  ghc-options:         -threaded -O2 -rtsopts -with-rtsopts=-N
+  build-depends:       base
+                     , aivika
+                     , aivika-transformers
+                     , aivika-experiment
+                     , aivika-experiment-chart
+                     , aivika-experiment-diagrams
+                     , load-balancing-model
+                     , Chart
+                     , Chart-diagrams
+                     , array
+                     , mtl
+                     , open-browser
+                     , filepath
+                     , directory
+                     , random-shuffle
+  default-language:    Haskell2010
+  other-extensions:    TemplateHaskell,
+                       DeriveGeneric,
+                       DeriveDataTypeable
+
+test-suite load-balancing-model-test
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      test
+  main-is:             Spec.hs
+  build-depends:       base
+                     , load-balancing-model
+  ghc-options:         -threaded -O2 -rtsopts -with-rtsopts=-N
+  default-language:    Haskell2010
